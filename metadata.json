@@ -1,0 +1,6 @@
+{
+  "name": "Agile Nexus Admin",
+  "description": "Agile Nexus Judge Workload & Tracking Admin Portal for SEAL Hackathon. Monitor evaluation progress, identify bottlenecks, and manage judge assignments in real-time.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
