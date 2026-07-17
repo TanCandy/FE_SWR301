@@ -52,6 +52,19 @@ import ManageEvaluationPage from './pages/admin/ManageEvaluationPage';
 import ReportsPage from './pages/admin/ReportsPage';
 import SystemSettingsPage from './pages/admin/SystemSettingsPage';
 
+// PDP Staff Pages
+import PdpStaffDashboard from './pages/dashboards/PdpStaffDashboard';
+import PdpViewRankingPage from './pages/pdp-staff/ViewRankingPage';
+import PdpStatisticsPage from './pages/pdp-staff/StatisticsPage';
+import PdpCertificatesPage from './pages/pdp-staff/CertificatesPage';
+import PdpAnnouncementsPage from './pages/pdp-staff/PdpAnnouncementsPage';
+
+// Event Coordinator Pages
+import EventCoordinatorDashboard from './pages/dashboards/EventCoordinatorDashboard';
+import CoordinatorEventsPage from './pages/event-coordinator/EventsPage';
+import CoordinatorSchedulePage from './pages/event-coordinator/SchedulePage';
+import CoordinatorAnnouncementsPage from './pages/event-coordinator/AnnouncementsPage';
+
 import { UserRole } from './types/auth';
 
 function RoleBasedDashboard() {
@@ -65,13 +78,15 @@ function RoleBasedDashboard() {
     student: <StudentDashboard />,
     judge: <JudgeDashboard />,
     administrator: <AdminDashboardPage />,
+    pdp_staff: <PdpStaffDashboard />,
+    event_coordinator: <EventCoordinatorDashboard />,
   };
 
   return dashboards[user.role] || <Navigate to="/403" replace />;
 }
 
 function AppRoutes() {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, user } = useAuth();
 
   if (isLoading) {
     return (
@@ -333,7 +348,7 @@ function AppRoutes() {
       <Route
         path="/dashboard/reports"
         element={
-          <ProtectedRoute requiredRoles={['administrator']}>
+          <ProtectedRoute requiredRoles={['administrator', 'pdp_staff']}>
             <ReportsPage />
           </ProtectedRoute>
         }
@@ -343,6 +358,82 @@ function AppRoutes() {
         element={
           <ProtectedRoute requiredRoles={['administrator']}>
             <SystemSettingsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* PDP Staff Routes */}
+      <Route
+        path="/dashboard/view-ranking"
+        element={
+          <ProtectedRoute requiredRoles={['pdp_staff', 'administrator']}>
+            <PdpViewRankingPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/statistics"
+        element={
+          <ProtectedRoute requiredRoles={['pdp_staff', 'administrator']}>
+            <PdpStatisticsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/certificates"
+        element={
+          <ProtectedRoute requiredRoles={['pdp_staff', 'administrator']}>
+            <PdpCertificatesPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/announcements"
+        element={
+          <ProtectedRoute requiredRoles={['pdp_staff', 'event_coordinator', 'administrator']}>
+            {['pdp_staff'].includes(user?.role || '') ? <PdpAnnouncementsPage /> : <CoordinatorAnnouncementsPage />}
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Event Coordinator Routes */}
+      <Route
+        path="/dashboard/manage-event"
+        element={
+          <ProtectedRoute requiredRoles={['event_coordinator', 'administrator']}>
+            <CoordinatorEventsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/manage-track"
+        element={
+          <ProtectedRoute requiredRoles={['event_coordinator', 'administrator']}>
+            <ManageTrackPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/manage-round"
+        element={
+          <ProtectedRoute requiredRoles={['event_coordinator', 'administrator']}>
+            <ManageRoundPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/manage-participants"
+        element={
+          <ProtectedRoute requiredRoles={['event_coordinator', 'administrator']}>
+            <ManageParticipantsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/schedule"
+        element={
+          <ProtectedRoute requiredRoles={['event_coordinator', 'administrator']}>
+            <CoordinatorSchedulePage />
           </ProtectedRoute>
         }
       />

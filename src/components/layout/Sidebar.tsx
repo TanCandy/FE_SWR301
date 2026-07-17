@@ -26,6 +26,10 @@ import {
   LogOut,
   Menu,
   X,
+  Award,
+  TrendingUp,
+  Megaphone,
+  CalendarClock,
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -54,6 +58,10 @@ const iconMap: Record<string, ReactNode> = {
   gift: <Gift className="w-5 h-5" />,
   'bar-chart': <BarChart3 className="w-5 h-5" />,
   settings: <Settings className="w-5 h-5" />,
+  award: <Award className="w-5 h-5" />,
+  'trending-up': <TrendingUp className="w-5 h-5" />,
+  megaphone: <Megaphone className="w-5 h-5" />,
+  'calendar-clock': <CalendarClock className="w-5 h-5" />,
 };
 
 interface SidebarProps {

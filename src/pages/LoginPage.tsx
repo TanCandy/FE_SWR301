@@ -1,5 +1,5 @@
 import { useState, FormEvent, ReactNode } from 'react';
-import { Eye, EyeOff, Lock, Mail, AlertCircle, Trophy, Users, BookOpen, Shield } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, AlertCircle, Trophy, Users, BookOpen, Shield, Award, CalendarClock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { UserRole, ROLE_LABELS, ROLE_COLORS } from '../types/auth';
@@ -10,6 +10,8 @@ const roleIcons: Record<UserRole, ReactNode> = {
   student: <Users className="w-5 h-5" />,
   judge: <Trophy className="w-5 h-5" />,
   administrator: <Shield className="w-5 h-5" />,
+  pdp_staff: <Award className="w-5 h-5" />,
+  event_coordinator: <CalendarClock className="w-5 h-5" />,
 };
 
 const roleDescriptions: Record<UserRole, string> = {
@@ -18,6 +20,8 @@ const roleDescriptions: Record<UserRole, string> = {
   student: 'Collaborate and deliver',
   judge: 'Evaluate submissions',
   administrator: 'Full system access',
+  pdp_staff: 'Track rankings & certificates',
+  event_coordinator: 'Coordinate events & schedules',
 };
 
 export default function LoginPage() {
@@ -206,21 +210,21 @@ export default function LoginPage() {
             {/* Quick Demo Login */}
             <div>
               <h3 className="text-sm font-semibold text-gray-700 mb-4 text-center">Quick Demo Login</h3>
-              <div className="grid grid-cols-1 gap-3">
-                {(['team_leader', 'mentor', 'student', 'judge', 'administrator'] as UserRole[]).map((role) => (
+              <div className="grid grid-cols-1 gap-2.5 max-h-[420px] overflow-y-auto pr-1">
+                {(['team_leader', 'mentor', 'student', 'judge', 'administrator', 'pdp_staff', 'event_coordinator'] as UserRole[]).map((role) => (
                   <button
                     key={role}
                     onClick={() => handleDemoLogin(role)}
                     className={`flex items-center gap-3 p-3 rounded-xl border-2 border-gray-100 hover:border-blue-200 hover:bg-blue-50/50 transition-all duration-200 group`}
                   >
-                    <div className={`w-10 h-10 rounded-lg ${ROLE_COLORS[role]} flex items-center justify-center text-white group-hover:scale-110 transition-transform`}>
+                    <div className={`w-10 h-10 rounded-lg ${ROLE_COLORS[role]} flex items-center justify-center text-white group-hover:scale-110 transition-transform flex-shrink-0`}>
                       {roleIcons[role]}
                     </div>
-                    <div className="flex-1 text-left">
+                    <div className="flex-1 text-left min-w-0">
                       <p className="font-medium text-gray-900">Login as {ROLE_LABELS[role]}</p>
-                      <p className="text-xs text-gray-500">{roleDescriptions[role]}</p>
+                      <p className="text-xs text-gray-500 truncate">{roleDescriptions[role]}</p>
                     </div>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
                       <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>

@@ -55,6 +55,25 @@ export const NAV_ITEMS: Record<string, NavItem[]> = {
     { id: 'system-settings', label: 'System Settings', icon: 'settings' },
     { id: 'profile', label: 'Profile', icon: 'user' },
   ],
+  pdp_staff: [
+    { id: 'dashboard', label: 'Dashboard', icon: 'layout' },
+    { id: 'view-ranking', label: 'View Ranking', icon: 'trophy' },
+    { id: 'reports', label: 'Reports', icon: 'bar-chart' },
+    { id: 'statistics', label: 'Hackathon Statistics', icon: 'trending-up' },
+    { id: 'certificates', label: 'Certificates', icon: 'award' },
+    { id: 'announcements', label: 'Announcements', icon: 'bell' },
+    { id: 'profile', label: 'Profile', icon: 'user' },
+  ],
+  event_coordinator: [
+    { id: 'dashboard', label: 'Dashboard', icon: 'layout' },
+    { id: 'manage-event', label: 'Manage Hackathon Event', icon: 'calendar' },
+    { id: 'manage-track', label: 'Manage Track', icon: 'layers' },
+    { id: 'manage-round', label: 'Manage Round', icon: 'flag' },
+    { id: 'manage-participants', label: 'Manage Participants', icon: 'user-plus' },
+    { id: 'announcements', label: 'Announcements', icon: 'megaphone' },
+    { id: 'schedule', label: 'Schedule', icon: 'calendar-clock' },
+    { id: 'profile', label: 'Profile', icon: 'user' },
+  ],
 };
 
 export const PAGE_COMPONENTS: Record<string, string> = {
@@ -84,4 +103,8 @@ export const PAGE_COMPONENTS: Record<string, string> = {
   'manage-evaluation': 'Manage Evaluation',
   'reports': 'Reports',
   'system-settings': 'System Settings',
+  'view-ranking': 'View Ranking',
+  'statistics': 'Hackathon Statistics',
+  'certificates': 'Certificates',
+  'schedule': 'Schedule',
 };
